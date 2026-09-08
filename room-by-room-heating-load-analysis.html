@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Room-by-Room Heating Load Analysis</title>
+<meta name="title" content="Room-by-Room Heating Load Analysis">
+<meta name="dc.title" content="Room-by-Room Heating Load Analysis">
+<meta name="description" content="The whole-house load splits into room-by-room heat loss that feeds duct design and register selection. Heres how the room-level calculation connects the two.">
+<meta name="keywords" content="Room-by-Room Heating Load Analysis">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><link rel="canonical" href="room-by-room-heating-load-analysis.html">
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Kumbh+Sans:100,200,300,400,500,600,700,800,900&amp;display=swap">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="img/" alt="Room-by-Room Heating Load Analysis" />
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<style type="text/css">
+ 	.c1082c2a9ae1c1d708c9f4655501714be{
+font-size:16px!important;
+color: #676767;
+}
+.w124953cc949241c39985d2eec52e3994 .u7c306cf0fea27eec32802323ba5dcd6e *{
+color:#000000;
+}
+.yda5f42cbbfdd57a54cd49fc78042967c{
+width: 100%;
+max-height: 720px;
+object-fit: cover;
+object-position: center;
+display: block;
+max-height: 100%;
+max-width: 100%;
+margin: auto;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+}
+.w124953cc949241c39985d2eec52e3994 .card-img{
+margin-bottom: 1.7rem;
+text-align: left;
+}
+.w124953cc949241c39985d2eec52e3994 .cb9029337a4906ef46576f38567c82ace *{
+color:#000000;
+}
+.w124953cc949241c39985d2eec52e3994 .vbdfea36d7059f314f1e32b79aa66293c *{
+color:#000000;
+}
+footer *{
+font-size:16px !important;
+}
+.c969dd181680bda0056e61b3f3c5c8007{
+font-size: 45px!important;
+}
+a:hover{
+color:#ffffff;background:#ffc658!important;
+}
+.wf393eea2c41eb1fc06078573885c440a a{
+color:#ff851b!important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-header{
+cursor: pointer;
+padding: 1.75rem 2rem;
+color: #3f43fd;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-align: center;
+-ms-flex-align: center;
+-ms-grid-row-align: center;
+align-items: center;
+-webkit-box-pack: justify;
+-ms-flex-pack: justify;
+justify-content: space-between;
+}
+.navbar a{
+font-size: 18px!important;
+font-weight: bold;
+}
+.w124953cc949241c39985d2eec52e3994 .wf393eea2c41eb1fc06078573885c440a{
+background:#eddad8!important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-header .collapsed{
+color: #0b0e5b;
+}
+.x830e2fc02bd1f915edb28d61dee44519{
+text-decoration: underline!important;color:#ff8f25!important
+}
+*{
+font-family: 'Kumbh Sans', sans-serif;
+}
+a{
+text-decoration: none;
+}
+.uc18d002118e4e9849b9ad8b2740b0e6f{
+font-weight: inherit;
+background-image: linear-gradient(120deg, #ffd062 0%, #ffd365 100%);
+background-repeat: no-repeat;
+background-size: 100% 30%;
+background-position: 0 90%;
+transition: background-size 0.2s ease-in;
+}
+.a10f8d50566d07d03a9189f5e9f596a10 i{
+border-radius: 50%;
+width: 36.5px;
+line-height: 35px;
+text-align: center;
+height: 36.8px;
+}
+.w4180d37a9d5961040f46f77fe7d51fcd{
+position: relative;
+min-height: 600px;
+}
+.xa77c21443009de73b9a22dcf371519d8 a{
+font-size:16px;
+}
+.u7c306cf0fea27eec32802323ba5dcd6e a{
+color:#ff9127!important;
+}
+iframe{
+border: none!important;
+}
+.nav-item{
+padding-left:7.7px;
+padding-right:8.2px;
+padding-top:4.7px;
+padding-bottom:5.1px;
+}
+.c9969a0a9e42f450e907ddff1c516fe18 a,.xa77c21443009de73b9a22dcf371519d8 a{
+color:#0f0f0f!important;
+text-decoration: underline !important;
+}
+footer a{
+color:#ffffff;
+text-decoration: underline;
+}
+.vbdfea36d7059f314f1e32b79aa66293c a{
+color:#ff861c!important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-body p:last-child{
+margin-bottom: 0;
+}
+.u7c306cf0fea27eec32802323ba5dcd6e *{
+color:#000000;
+}
+footer{
+background:#0a0a0a;
+color:#ffffff;
+}
+.u50c1a4b334324b433632724916a2c55a *{
+color: white !important;
+}
+.y6b2b9ba630e87af321924cce9c04e70c{
+color: #404040;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-body{
+padding: 1.75rem 2rem;
+}
+.c9969a0a9e42f450e907ddff1c516fe18 p,.c9969a0a9e42f450e907ddff1c516fe18 a,.c9969a0a9e42f450e907ddff1c516fe18 span,.c9969a0a9e42f450e907ddff1c516fe18 label{
+font-size:16px!important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-header span{
+font-size: 1.5rem;
+}
+.te8c1a58628072d89bef1dd33f0446116{
+transition: all 0.3s;
+border-radius: 30px;
+}
+.w124953cc949241c39985d2eec52e3994 .row-item.wf393eea2c41eb1fc06078573885c440a{
+background: #ffecea;
+}
+.w124953cc949241c39985d2eec52e3994 .vbdfea36d7059f314f1e32b79aa66293c{
+background:#bcd9df!important;
+}
+.u50c1a4b334324b433632724916a2c55a{
+background: rgba(0, 0, 0, 0.6);
+text-align: center;
+}
+.w124953cc949241c39985d2eec52e3994 .u7c306cf0fea27eec32802323ba5dcd6e{
+background:#eae8e4!important ;
+}
+.vbdfea36d7059f314f1e32b79aa66293c{
+background:#eae8e4!important ;
+}
+.xa77c21443009de73b9a22dcf371519d8 p,.xa77c21443009de73b9a22dcf371519d8 span,.xa77c21443009de73b9a22dcf371519d8 label{
+font-size:16px!important;
+}
+.w4a90e33dafcda644eeb6955def754bad{
+font-size: 20.4px;
+font-weight: bold;
+}
+.nav-link{
+color: #000000;
+
+}
+.aba9b6aec085237c9c663421b5f3facf7{
+max-height: 300px;
+overflow-y: auto;
+}
+.te369f1bc3c68a293d9a295bd2684a072{
+background-color: #030303;
+font-size: 30.2px;
+height: 56.2px;
+min-width: 56.1px;
+padding: 0.7rem;
+padding-top: 13px;
+color: #fff !important;
+border: 1px solid #010101;
+border-radius: 50%;
+}
+.cb9029337a4906ef46576f38567c82ace a{
+color:#ff8a20!important;
+}
+.xa77c21443009de73b9a22dcf371519d8 *{
+color:#121212!important;
+}
+.w124953cc949241c39985d2eec52e3994 .wf393eea2c41eb1fc06078573885c440a *{
+color:#000000;
+}
+.e915a8a02c01ce77e9b4de4e15a79d2ed{
+background-color:#ffffff!important;
+border-color:#ffffff!important;
+color:#000000!important;
+}
+.w1fb23f821bc666a43289fbf4aa11c544{
+font-size: 2rem !important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000{
+position: relative;
+z-index: 1;
+}
+.a10f8d50566d07d03a9189f5e9f596a10 i:hover{
+background: white;
+color: #ffffff;!important;
+line-height: 35px;
+border-radius: 50%;
+width: 36.9px;
+text-align: center;
+height: 37.3px;
+}
+.b58d3eccee015125ef8ec84639a97bf8b{
+color: #9a9a9a;
+font-size: 19.6px;
+margin-bottom: 20.6px;
+}
+.xa77c21443009de73b9a22dcf371519d8{
+background:#ffffff;
+}
+.navbar-toggler span{
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid lightgrey;
+border-radius: 3px;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card{
+position: relative;
+z-index: 1;
+margin-bottom: 1.5rem;
+}
+.w124953cc949241c39985d2eec52e3994 p,.{special_content1_class} a,.w124953cc949241c39985d2eec52e3994 label{
+font-size:16px!important;
+}
+.c6d71edac42cc3237871b8a699154b315{
+font-size:45px!important;
+}
+.c9969a0a9e42f450e907ddff1c516fe18{
+background:#ffffff;
+color:#0f0f0f;
+}
+.w124953cc949241c39985d2eec52e3994 .cb9029337a4906ef46576f38567c82ace{
+background:#c1bebe!important;
+}
+body{
+color: #313131;
+}
+.w124953cc949241c39985d2eec52e3994 .row-item.u7c306cf0fea27eec32802323ba5dcd6e{
+background: #f5f3ef;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card .card-header .collapsed span{
+-webkit-transform: rotate(-180deg);
+transform: rotate(-180deg);
+}
+.w124953cc949241c39985d2eec52e3994 .row-item.vbdfea36d7059f314f1e32b79aa66293c{
+background: #cdeaf0;
+}
+.w124953cc949241c39985d2eec52e3994 .row-item{
+padding: 3rem;
+padding-top: 3.7rem;
+height: 100%;
+}
+.w124953cc949241c39985d2eec52e3994 .row-item.cb9029337a4906ef46576f38567c82ace{
+background: #c3c0c0;
+}
+.btn-md{
+padding: 15.2px 29.6px;
+border-radius: 0;
+}
+.wc90709c8d54fd59705e86a7ab124a974{
+font-size: 14.1px;
+}
+.w124953cc949241c39985d2eec52e3994 .x148226adfd396989ae51284509a41782{
+margin-bottom: 1.5rem;
+}
+.y74ba1d9efd0f917be88a106f7beff8e9{
+position: relative;
+z-index: 1;
+}
+img{
+border-radius:20px
+}
+html{
+scroll-behavior: smooth;
+}
+.te8c1a58628072d89bef1dd33f0446116:hover{
+box-shadow: 0 50.1px 50.4px -25px rgb(0 0 0 / 30%);
+transform: rotate(-2deg) scale(1.03);
+}
+.wd4a2ec7ed5fb261886e0386c78759a69:hover,.uc18d002118e4e9849b9ad8b2740b0e6f:hover{
+background-size: 100% 100% !important;
+background: #ffc658!important;
+background-repeat: no-repeat !important;
+background-position: 0 90% !important;
+transition: background-size 0.2s ease-in !important;
+}
+.f30901bbcb08e8a8ec24a27d5ef3de000 .card:last-child{
+margin-bottom: 0;
+}
+.w124953cc949241c39985d2eec52e3994 h4{
+font-size:24px!important;
+}
+ </style>
+<style type="text/css"> 
+   .parallax-background {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 500px; /* Adjust as needed */
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 20px;
+}
+
+
+.parallax-content {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding:20px 40px;
+    margin: 50px auto; /* Creates space for parallax effect */
+    max-width: 80%;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+}
+.img-fluid{
+	max-height: 400px
+}
+@media only screen and (max-width:1000px) {
+.w4180d37a9d5961040f46f77fe7d51fcd img{
+position: initial!important;
+}
+
+.c6d71edac42cc3237871b8a699154b315 {
+font-size: 20px;
+}
+.b58d3eccee015125ef8ec84639a97bf8b {
+font-size: 15px !important;
+}
+.d5ed45b163be4a4b90bcdc2b26d011400{
+padding-bottom: 0px !important;
+}
+} 
+.content-image-below {
+    margin: 20px 0;
+    text-align: center;
+}
+.image-align-left ol,.image-align-left ul{
+  margin-left: 51%;
+}
+ 
+/* For background image */
+.content-with-bg-image {
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    position: relative;
+}
+
+.content-over-bg {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+}
+.content-image-below img,.content-with-side-images img,{
+	max-height: 500px!important;
+
+}
+ 
+ 
+
+/* Text container */
+.text-container {
+    flex: 0 0 60%;
+    max-width: 60%;
+    padding: 0 1rem;
+}
+ 
+
+ /* Main content container */
+.content-with-side-images {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Headers should always be full width */
+.content-with-side-images h4 {
+    width: 100%;
+    clear: both;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+/* Regular paragraphs should be full width by default */
+.content-with-side-images p {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+/* Image-text pair container */
+.image-text-pair {
+    width: 100%;
+    margin:  0px 0;
+   
+}
+
+/* Image container - floated */
+.image-container {
+    width: 50%;
+    
+    box-sizing: border-box;
+ 
+}
+.image-container img:hover{
+
+box-shadow: 0 49.6px 50.3px -25px rgb(0 0 0 / 30%);
+    transform: rotate(-2deg) scale(1.03);
+}
+.image-container img{
+transition: all 0.3s;
+}
+
+/* Left-aligned image */
+.image-align-left .image-container {
+    float: left;
+    margin-right: 20px;
+    margin-left: 0;
+    padding-right: 40px;
+}
+
+/* Right-aligned image */
+.image-align-right .image-container {
+    float: right;
+    margin-left: 20px;
+    margin-right: 0;
+
+    padding-left: 40px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+ 
+
+/* Clearfix */
+.clearfix {
+    clear: both;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .image-container {
+        width: 100%;
+        float: none !important;
+        margin: 0 0 20px 0 !important;
+        padding: 0;
+    }
+    
+    .text-flow {
+        display: block;
+    }
+} 
+  
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0px;
+    left: 100%;
+    margin-top: -16px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+  
+}
+
+/* Smart positioning for right-edge dropdowns */
+.dropdown-menu-right .dropdown-submenu>.dropdown-menu,
+.nav-item:last-child .dropdown-submenu>.dropdown-menu,
+.nav-item:nth-last-child(2) .dropdown-submenu>.dropdown-menu {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: -1px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+/* For left-positioned dropdowns, reverse the arrow */
+.dropdown-menu-right .dropdown-submenu>a:after,
+.nav-item:last-child .dropdown-submenu>a:after,
+.nav-item:nth-last-child(2) .dropdown-submenu>a:after {
+    float: left;
+    border-width: 5px 5px 5px 0;
+    border-left-color: transparent;
+    border-right-color: #ccc;
+    margin-left: -10px;
+    margin-right: 0;
+}
+
+.dropdown-menu-right .dropdown-submenu:hover>a:after,
+.nav-item:last-child .dropdown-submenu:hover>a:after,
+.nav-item:nth-last-child(2) .dropdown-submenu:hover>a:after {
+    border-right-color: #fff;
+    border-left-color: transparent;
+}
+ 
+
+.multi-column-dropdown .dropdown-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .multi-column-dropdown {
+      
+        width: 100%;
+    }
+    
+    .dropdown-submenu>.dropdown-menu {
+        position: static;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+/* Use hover only where it exists */
+@media (hover:hover) {
+  .dropdown-submenu:hover > .dropdown-menu { display:block; }
+}
+
+/* Nested dropdowns should show when .show is present (Bootstrap only sets this for top-level) */
+.dropdown-menu .dropdown-menu { display:none; }
+.dropdown-menu .dropdown-menu.show { display:block; }
+
+/* Mobile layout: stack submenus and remove weird offsets */
+@media (max-width: 991.98px) {
+  .dropdown-menu {
+    position: static;          /* keeps the menu within the flow so it won't render off-screen */
+    float: none;
+    margin: 0;
+    box-shadow: none;
+    border: 0;
+  }
+  .dropdown-submenu > .dropdown-menu {
+    margin-left: 0;
+    max-height: 60vh;          /* scroll if long */
+    overflow-y: auto;
+  }
+}
+
+</style>
+<script type="application/ld+json">
+{
+"@type": "WebPage",
+"@context": "http://www.schema.org","lastReviewed": "2021-12-01",
+"mainContentOfPage": {
+"about": {"url": "room-by-room-heating-load-analysis.html","name": "","description": "",
+"disambiguatingDescription": ""},
+"accessibilitySummary": ""},
+"keywords": [""],
+"award": ["Best "],
+"teaches": [""],
+"educationalUse": [""],
+"text": [""],
+"workExample": {
+"about": {"url": "room-by-room-heating-load-analysis.html"
+}
+},
+"citation": {
+"@type": "CreativeWork",
+"about": {
+"url": "room-by-room-heating-load-analysis.html"}
+},
+"hasPart":[
+]
+}
+</script> 
+</head>
+
+<body><nav class="navbar navbar-expand-lg">
+<a class="navbar-brand" href="residential-heat-loss-calculation-and-manual-j-methodology.html"  ></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon  fa fa-bars"></span></button><div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="ml-auto d-flex navbar-nav align-items-center">        
+            <!-- Show all double menus if within limit -->
+                                <li class="dropdown-hover nav-item dropdown">
+                <a class="nav-link wd4a2ec7ed5fb261886e0386c78759a69 dropdown-toggle" href="javascript:;" id="navbarDropdown0" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Heat Loss and Load Design Guides                </a>
+                <div class="dropdown-menu dropdown-menu-right  " aria-labelledby="navbarDropdown0">
+                                                                    <a class="dropdown-item" href="residential-heat-loss-calculation-and-manual-j-methodology.html" >
+                            Residential Heat Loss Calculation and Manual J Methodology                        </a>
+                                                                    <a class="dropdown-item" href="what-manual-j-measures-on-residential-heat-loss.html" >
+                            What Manual J Measures on Residential Heat Loss                        </a>
+                                                                    <a class="dropdown-item" href="envelope-inputs-that-drive-manual-j-heat-loss.html" >
+                            Envelope Inputs That Drive Manual J Heat Loss                        </a>
+                                                                    <a class="dropdown-item" href="room-by-room-heating-load-analysis.html" >
+                            Room-by-Room Heating Load Analysis                        </a>
+                                                                    <a class="dropdown-item" href="common-manual-j-heat-loss-errors-and-audits.html" >
+                            Common Manual J Heat Loss Errors and Audits                        </a>
+                                    </div>
+            </li>
+            
+    </ul>
+</div>
+</nav>
+   
+<div class="d5ed45b163be4a4b90bcdc2b26d011400 w4180d37a9d5961040f46f77fe7d51fcd container-fluid">
+<img  src="img/heating-load-report-audit-review-banner.jpg" width="100%" class="yda5f42cbbfdd57a54cd49fc78042967c" alt="Room-by-Room Heating Load Analysis" title="Room-by-Room Heating Load Analysis ">
+</div><div class="container-fluid "><div class="container pb-5 pt-5">
+<div class="row">
+<div class="pt-5 col-lg-12 pb-5 text-center" id="">
+<h1 class="mb-0 c6d71edac42cc3237871b8a699154b315">Room-by-Room Heating Load Analysis</h1></div><div class="m-auto  col-lg-12">
+<div class="content">
+
+<div class="content-with-side-images"> <div style="font-size:18px;line-height:1.6;"> <p><em>By the Editorial Team | Published: August 2026 | Last Updated: August 2026</em></p> <h2>How the Whole-House Heat Loss Number Splits Room-by-Room and Why It Matters for Duct Design</h2> <p>Manual J produces a whole-house design heat loss number that sizes the equipment, but the same calculation also breaks the load into room-by-room heat loss numbers that inform how the airflow gets distributed. Room-by-room analysis is where Manual J connects to Manual D duct design and Manual T register selection, and skipping it produces systems that meet the whole-house load but leave individual rooms uncomfortable.</p> <p>This guide walks through how room loads are computed, how they feed the duct design, and where the room-by-room process most commonly breaks down in practice. It is written for designers and homeowners who want to understand the connection between load calculation and comfort delivery.</p> <h2>Why Room-by-Room Analysis Matters</h2> <p>A house does not lose heat evenly across all rooms. Corner rooms with two exterior walls lose more heat than interior rooms with one exterior wall. Rooms with large window areas lose more than rooms with modest glazing. Rooms above unconditioned garages lose more through the floor than rooms above conditioned space. Rooms directly under vented attics lose more through the ceiling than rooms with conditioned space above.</p> <p>If the equipment airflow is distributed evenly across all rooms, the high-loss rooms end up under-heated while the low-loss rooms end up over-heated. Room-by-room load calculation identifies which rooms need more airflow and which need less, then the Manual D duct design sizes the branch ducts to deliver the correct per-room airflow.</p> <h2>The Room-by-Room Calculation Process</h2> <p>Manual J room-by-room analysis applies the same envelope heat loss formulas at the room scale. For each room:</p> <ul> <li>Measure the exposed exterior wall area (interior walls between conditioned rooms have no heat loss).</li> <li>Measure the exposed window and door areas by orientation.</li> <li>Determine whether the ceiling is under conditioned or unconditioned space.</li> <li>Determine whether the floor is over conditioned, unconditioned, or grade-level.</li> <li>Allocate a share of the total house infiltration proportional to the room's exterior surface area.</li> <li>Sum the conductive and infiltration losses to get the room's design heat loss in BTU per hour.</li> </ul> <p>The sum of all room loads equals the whole-house load (with minor rounding). Each room's share of the total determines its share of total system airflow. A room with 15 percent of the total heat loss should receive 15 percent of the total system airflow.</p> <div class="content-image-below"><img class="img-fluid" src="img/wall-framing-with-continuous-exterior-rigid-foam.jpg" /></div> <p> </p> <h2>Converting Room Loads to Design Airflow</h2> <p>Once room loads are known, the calculation converts BTU per hour to CFM per room based on the supply-air temperature the equipment delivers. The formula: CFM equals room heat loss in BTU per hour divided by (1.08 times supply-air temperature rise above room temperature).</p> <p>For a gas furnace delivering 140 F supply air into a 70 F room (temperature rise of 70 F): a room with 6,000 BTU per hour heat loss needs 6,000 divided by (1.08 x 70) equals about 79 CFM. For a heat pump delivering 95 F supply air into a 70 F room (temperature rise of 25 F): the same 6,000 BTU per hour room needs 6,000 divided by (1.08 x 25) equals about 222 CFM. Heat pump systems need substantially more airflow per BTU because the supply-air temperature is lower.</p> <p>This difference affects duct sizing directly. A heat-pump-based design has larger ducts than a furnace-based design for the same house because the airflow requirement is higher.</p> <h2>How Room Loads Feed Manual D Duct Design</h2> <p>Manual D takes the per-room CFM requirements and sizes the branch ducts to deliver each requirement at an acceptable friction rate. The friction rate is the pressure loss per 100 feet of equivalent duct length, and Manual D targets specific rates (0.08 to 0.10 inches of water column per 100 feet for metal, less for flex duct). Higher friction rates require larger fan static pressure and shorten equipment life.</p> <p>The duct sizing algorithm:</p> <ul> <li>Sum all branch CFMs to get the trunk CFM.</li> <li>Size the trunk to carry the total CFM at the target friction rate.</li> <li>Size each branch to carry its CFM at the same friction rate.</li> <li>Account for fittings (elbows, tees, boots, takeoffs) as equivalent length additions.</li> <li>Verify total external static pressure stays within the air handler's rated maximum.</li> </ul> <h2>Return-Path Design Consequences</h2> <p>Room-by-room analysis also informs return-path design. A house with substantially different loads per bedroom needs return paths that can pull air from each bedroom effectively even with doors closed. Options include dedicated returns per bedroom, transfer grilles above bedroom doors, or undercut doors sized for adequate return airflow.</p> <div class="content-image-below"><img class="img-fluid" src="img/nfrc-window-rating-label-detail.jpg" /></div> <p> </p> <p>Skipping return-path analysis produces bedrooms that pressurize when doors close, which reduces supply airflow and creates comfort complaints. Manual J's room-by-room output feeds into the return-path decision because it identifies which rooms have the largest supply airflow requirements and therefore the largest return airflow needs.</p> <h2>Register and Grille Selection</h2> <p>Manual T sizes registers and grilles to deliver the room's design CFM at acceptable air velocity (typically below 900 feet per minute at the register face) and appropriate throw pattern for the room geometry. Room-by-room loads feed this selection because the design CFM is a per-room number.</p> <p>Registers matter for comfort more than most homeowners realize. An undersized register creates high velocity, noise, and draft complaints. An oversized register creates poor throw pattern and cold spots. Manual T sizing rules address both.</p> <h2>Room-by-Room Loads and Airflow at a Glance</h2> <table border="1" cellpadding="8" style="border-collapse:collapse;margin:4px 0;width:100%;"> <tbody> <tr> <th>Example room</th> <th>Typical share of house load</th> <th>Airflow implication</th> </tr> <tr> <td>Master bedroom with 2 exterior walls and large windows</td> <td>10 to 15 percent</td> <td>Highest per-room airflow; often needs 2 supply registers</td> </tr> <tr> <td>Interior bathroom with no exterior wall</td> <td>2 to 4 percent</td> <td>Small airflow; single register sized minimum</td> </tr> <tr> <td>Living room with vaulted ceiling and south glazing</td> <td>15 to 25 percent</td> <td>High airflow; multiple registers common</td> </tr> <tr> <td>Small bedroom with 1 exterior wall</td> <td>5 to 8 percent</td> <td>Moderate airflow; single register</td> </tr> <tr> <td>Kitchen with exterior wall and appliances</td> <td>8 to 12 percent</td> <td>Moderate airflow; sized against appliance offset</td> </tr> </tbody> </table> <h2>Frequently Asked Questions</h2> <h3>How does the room-by-room calculation handle open floor plans?</h3> <p>Open floor plans are treated as a single conditioned zone rather than separate rooms because the air moves freely between the connected spaces. The load calculation applies to the whole zone, and airflow distribution within the zone uses register placement to balance comfort rather than separate branch ducts per subroom.</p> <h3>What if the room-by-room CFMs do not sum to the whole-house CFM?</h3> <p>They should sum within rounding error. A meaningful mismatch (more than 5 percent) suggests a calculation error, usually double-counting or missing infiltration allocation. The designer reconciles the room-level values against the whole-house value before proceeding to duct design.</p> <h3>Does the room-by-room process apply to zoned systems too?</h3> <p>Yes, at the zone level. A zoned system has multiple thermostats controlling multiple zone dampers off a single equipment set. Room-by-room analysis feeds the per-zone load, and the per-zone loads determine the damper sizing and equipment capacity requirements when only one zone is calling.</p> <h3>How does Manual J treat bathrooms with fans and heat lamps?</h3> <p>The heat lamp is not counted as a heating source (occupant comfort supplement only). The exhaust fan is counted as a ventilation load when it is calibrated to run continuously; short-duration exhaust for use-and-off cycles is treated as intermittent and not counted in the design calculation.</p> <h3>What is the minimum design airflow per room?</h3> <p>Manual J and Manual T generally target a minimum of 50 CFM per supply outlet to maintain adequate throw and mixing. Rooms with very low calculated CFM (small bathrooms, closets) either use minimum-CFM registers or share airflow with adjacent rooms through transfer grilles.</p> <h3>How does room-by-room analysis change for radiant floor heating?</h3> <p>Radiant systems distribute heat through floor tubing rather than air. The room-by-room load calculation is the same because the loads are envelope-driven. The tubing layout then delivers the per-room load through varying tube spacing and floor temperature; higher-load rooms get closer tube spacing.</p> <h3>Do multiple stories change how room-by-room loads distribute?</h3> <p>Yes. Second-floor rooms typically have larger ceiling losses (under vented attics) and lower floor losses (over conditioned first floor). First-floor rooms typically have larger floor losses (over crawlspace or slab) and no ceiling loss (under conditioned second floor). Multi-zone designs often benefit from separate zones per floor to handle the different load characteristics efficiently.</p> <h3>What if the room-by-room analysis reveals a large imbalance?</h3> <p>The design responds by adjusting register sizes, branch duct sizes, or zoning strategy. Very imbalanced loads sometimes lead to a multi-system design (two smaller air handlers each serving half the house) instead of a single-system design. The room-by-room output is the diagnostic that surfaces the imbalance before construction locks it in.</p> </div> <div class="image-text-pair image-align-right"> <div class="image-container"><img alt="" class="img-fluid" src="img/room-by-room-load-worksheet-with-floor-plan.jpg" /></div> <div class="text-flow"> </div> </div> </div> <p><a href="./residential-heat-loss-calculation-and-manual-j-methodology.html">Residential Heat Loss Calculation and Manual J Methodology</a></p> <p><a class="y3c6e06300975746ef9c463050d570936" href="common-manual-j-heat-loss-errors-and-audits.html">Common Manual J Heat Loss Errors and Audits</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><footer>
+<div class="pt-5 py-4 container" >
+<div class="row"><div class="col-lg-3"><p><a class="wd4a2ec7ed5fb261886e0386c78759a69" href="sitemap.html" rel="nofollow">Sitemap</a></p>
+</p>
+</div></div>
+</div>
+</footer>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+var dropdowns = document.querySelectorAll('.dropdown-hover');
+function showDropdown() {
+var dropdownMenu = this.querySelector('.dropdown-menu');
+dropdownMenu.style.display = 'block';
+}
+function hideDropdown() {
+var dropdownMenu = this.querySelector('.dropdown-menu');
+dropdownMenu.style.display = 'none';
+}
+function handleClick(event) {
+var target = event.target;
+window.location.href = target.getAttribute('href');
+}
+dropdowns.forEach(function(dropdown) {
+dropdown.addEventListener('mouseenter', showDropdown);
+dropdown.addEventListener('mouseleave', hideDropdown);
+var dropdownMenu = dropdown.querySelector('.dropdown-toggle');
+dropdownMenu.addEventListener('click', handleClick);
+});
+});
+</script>
+ <script>
+(function() {
+  // Works with both BS4 (data-toggle events) and BS5
+  var $ = window.jQuery;
+
+  // Toggle nested submenu on click/tap
+  $(document).on('click', '.dropdown-submenu > a', function(e) {
+    var $toggle = $(this);
+    var $submenu = $toggle.next('.dropdown-menu');
+
+    // If there isn't a submenu, behave like a normal link
+    if (!$submenu.length) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Close sibling submenus at the same level
+    $toggle.parent('.dropdown-submenu')
+      .siblings('.dropdown-submenu')
+      .find('>.dropdown-menu.show')
+      .removeClass('show');
+
+    // Toggle this submenu
+    $submenu.toggleClass('show');
+
+    // Keep parent dropdown open
+    $toggle.closest('.dropdown-menu').addClass('show');
+
+    // Accessibility state
+    $toggle.attr('aria-expanded', $submenu.hasClass('show') ? 'true' : 'false');
+  });
+
+  // When the top-level dropdown closes, close all nested submenus
+  $(document).on('hidden.bs.dropdown', '.dropdown', function() {
+    $(this).find('.dropdown-menu.show').removeClass('show');
+  });
+})();
+</script>
+</body>
+</html>
