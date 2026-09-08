@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset
+          xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+     <url>
+                 <loc>news.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>residential-heat-pump-and-gas-furnace-comparison.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>how-heat-pumps-work-in-hot-humid-climate-winters.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>gas-furnace-sizing-and-venting-fundamentals.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>operating-cost-comparison-heat-pump-vs-gas-furnace.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>dual-fuel-hybrid-heating-systems-guide.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>sitemap.html</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>sitemap.xml</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url> <url>
+                 <loc>feed.xml</loc>
+                 <lastmod>2026-09-08T11:10:43+00:00</lastmod>
+                 <priority>0.80</priority>
+               </url></urlset>
